@@ -134,6 +134,10 @@ dmypy.json
 .vscode
 .idea
 
+main2.py
+users.csv
+run_job.sh
+
 history
 ssr_conf
 config_private.py
@@ -152,3 +156,5 @@ request_llms/moss
 media
 flagged
 request_llms/ChatGLM-6b-onnx-u8s8
+request_llm/jittorllms
+
