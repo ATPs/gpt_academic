@@ -158,3 +158,5 @@ flagged
 request_llms/ChatGLM-6b-onnx-u8s8
 request_llm/jittorllms
 
+.vs
+*.bak
