@@ -59,26 +59,26 @@ def get_crazy_functions():
             "Info": "载入对话历史存档 | 输入参数为路径",
             "Function": HotReload(载入对话历史存档)
         },
-        "删除所有本地对话历史记录（谨慎操作）": {
-            "Group": "对话",
-            "AsButton": False,
-            "Info": "删除所有本地对话历史记录，谨慎操作 | 不需要输入参数",
-            "Function": HotReload(删除所有本地对话历史记录)
-        },
-        "清除所有缓存文件（谨慎操作）": {
-            "Group": "对话",
-            "Color": "stop",
-            "AsButton": False,  # 加入下拉菜单中
-            "Info": "清除所有缓存文件，谨慎操作 | 不需要输入参数",
-            "Function": HotReload(清除缓存)
-        },
-        "批量总结Word文档": {
-            "Group": "学术",
-            "Color": "stop",
-            "AsButton": True,
-            "Info": "批量总结word文档 | 输入参数为路径",
-            "Function": HotReload(总结word文档)
-        },
+        # "删除所有本地对话历史记录（谨慎操作）": {
+        #     "Group": "对话",
+        #     "AsButton": False,
+        #     "Info": "删除所有本地对话历史记录，谨慎操作 | 不需要输入参数",
+        #     "Function": HotReload(删除所有本地对话历史记录)
+        # },
+        # "清除所有缓存文件（谨慎操作）": {
+        #     "Group": "对话",
+        #     "Color": "stop",
+        #     "AsButton": False,  # 加入下拉菜单中
+        #     "Info": "清除所有缓存文件，谨慎操作 | 不需要输入参数",
+        #     "Function": HotReload(清除缓存)
+        # },
+        # "批量总结Word文档": {
+        #     "Group": "学术",
+        #     "Color": "stop",
+        #     "AsButton": True,
+        #     "Info": "批量总结word文档 | 输入参数为路径",
+        #     "Function": HotReload(总结word文档)
+        # },
         "解析整个Matlab项目": {
             "Group": "编程",
             "Color": "stop",
@@ -142,15 +142,15 @@ def get_crazy_functions():
             "Info": "解析一个CSharp项目的所有源文件 | 输入参数为路径",
             "Function": HotReload(解析一个CSharp项目)
         },
-        "解析Jupyter Notebook文件": {
-            "Group": "编程",
-            "Color": "stop",
-            "AsButton": False,
-            "Info": "解析Jupyter Notebook文件 | 输入参数为路径",
-            "Function": HotReload(解析ipynb文件),
-            "AdvancedArgs": True,  # 调用时，唤起高级参数输入区（默认False）
-            "ArgsReminder": "若输入0，则不解析notebook中的Markdown块",  # 高级参数输入区的显示提示
-        },
+        # "解析Jupyter Notebook文件": {
+        #     "Group": "编程",
+        #     "Color": "stop",
+        #     "AsButton": False,
+        #     "Info": "解析Jupyter Notebook文件 | 输入参数为路径",
+        #     "Function": HotReload(解析ipynb文件),
+        #     "AdvancedArgs": True,  # 调用时，唤起高级参数输入区（默认False）
+        #     "ArgsReminder": "若输入0，则不解析notebook中的Markdown块",  # 高级参数输入区的显示提示
+        # },
         "读Tex论文写摘要": {
             "Group": "学术",
             "Color": "stop",
@@ -185,38 +185,38 @@ def get_crazy_functions():
             "Info": "保存当前的对话 | 不需要输入参数",
             "Function": HotReload(对话历史存档)
         },
-        "[多线程Demo]解析此项目本身（源码自译解）": {
-            "Group": "对话|编程",
-            "AsButton": False,  # 加入下拉菜单中
-            "Info": "多线程解析并翻译此项目的源码 | 不需要输入参数",
-            "Function": HotReload(解析项目本身)
-        },
-        "历史上的今天": {
-            "Group": "对话",
-            "AsButton": True,
-            "Info": "查看历史上的今天事件 (这是一个面向开发者的插件Demo) | 不需要输入参数",
-            "Function": HotReload(高阶功能模板函数)
-        },
-        "精准翻译PDF论文": {
-            "Group": "学术",
-            "Color": "stop",
-            "AsButton": True,  
-            "Info": "精准翻译PDF论文为中文 | 输入参数为路径",
-            "Function": HotReload(批量翻译PDF文档)
-        },
-        "询问多个GPT模型": {
-            "Group": "对话",
-            "Color": "stop",
-            "AsButton": True,
-            "Function": HotReload(同时问询)
-        },
-        "批量总结PDF文档": {
-            "Group": "学术",
-            "Color": "stop",
-            "AsButton": False,  # 加入下拉菜单中
-            "Info": "批量总结PDF文档的内容 | 输入参数为路径",
-            "Function": HotReload(批量总结PDF文档)
-        },
+        # "[多线程Demo]解析此项目本身（源码自译解）": {
+        #     "Group": "对话|编程",
+        #     "AsButton": False,  # 加入下拉菜单中
+        #     "Info": "多线程解析并翻译此项目的源码 | 不需要输入参数",
+        #     "Function": HotReload(解析项目本身)
+        # },
+        # "历史上的今天": {
+        #     "Group": "对话",
+        #     "AsButton": True,
+        #     "Info": "查看历史上的今天事件 (这是一个面向开发者的插件Demo) | 不需要输入参数",
+        #     "Function": HotReload(高阶功能模板函数)
+        # },
+        # "精准翻译PDF论文": {
+        #     "Group": "学术",
+        #     "Color": "stop",
+        #     "AsButton": True,  
+        #     "Info": "精准翻译PDF论文为中文 | 输入参数为路径",
+        #     "Function": HotReload(批量翻译PDF文档)
+        # },
+        # "询问多个GPT模型": {
+        #     "Group": "对话",
+        #     "Color": "stop",
+        #     "AsButton": True,
+        #     "Function": HotReload(同时问询)
+        # },
+        # "批量总结PDF文档": {
+        #     "Group": "学术",
+        #     "Color": "stop",
+        #     "AsButton": False,  # 加入下拉菜单中
+        #     "Info": "批量总结PDF文档的内容 | 输入参数为路径",
+        #     "Function": HotReload(批量总结PDF文档)
+        # },
         "谷歌学术检索助手（输入谷歌学术搜索页url）": {
             "Group": "学术",
             "Color": "stop",
@@ -224,13 +224,13 @@ def get_crazy_functions():
             "Info": "使用谷歌学术检索助手搜索指定URL的结果 | 输入参数为谷歌学术搜索页的URL",
             "Function": HotReload(谷歌检索小助手)
         },
-        "理解PDF文档内容 （模仿ChatPDF）": {
-            "Group": "学术",
-            "Color": "stop",
-            "AsButton": False,  # 加入下拉菜单中
-            "Info": "理解PDF文档的内容并进行回答 | 输入参数为路径",
-            "Function": HotReload(理解PDF文档内容标准文件输入)
-        },
+        # "理解PDF文档内容 （模仿ChatPDF）": {
+        #     "Group": "学术",
+        #     "Color": "stop",
+        #     "AsButton": False,  # 加入下拉菜单中
+        #     "Info": "理解PDF文档的内容并进行回答 | 输入参数为路径",
+        #     "Function": HotReload(理解PDF文档内容标准文件输入)
+        # },
         "英文Latex项目全文润色（输入路径或上传压缩包）": {
             "Group": "学术",
             "Color": "stop",
