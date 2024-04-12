@@ -608,14 +608,15 @@ if "google_gemini" in AVAIL_LLM_MODELS:   # zhipuai
     except:
         print(trimmed_format_exc())
 
+
 if "google_gemini_1.5" in AVAIL_LLM_MODELS:   # zhipuai
     try:
-        from .bridge_google_gemini_1_5 import predict_no_ui_long_connection as google_gemini_noui
-        from .bridge_google_gemini_1_5 import predict as google_gemini_ui
+        from .bridge_google_gemini_1_5 import predict_no_ui_long_connection as google_gemini_noui_1_5
+        from .bridge_google_gemini_1_5 import predict as google_gemini_ui_1_5
         model_info.update({
-            "google_gemini": {
-                "fn_with_ui": google_gemini_ui,
-                "fn_without_ui": google_gemini_noui,
+            "google_gemini_1.5": {
+                "fn_with_ui": google_gemini_ui_1_5,
+                "fn_without_ui": google_gemini_noui_1_5,
                 "endpoint": None,
                 "max_token": 32000,
                 "tokenizer": tokenizer_gpt35,
