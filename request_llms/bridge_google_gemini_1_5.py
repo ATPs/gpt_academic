@@ -74,7 +74,10 @@ def predict(inputs, llm_kwargs, plugin_kwargs, chatbot, history=[], system_promp
     response_iter = model.generate_content(messages, stream=True)
     response_text = ''
     for response in response_iter:
-        response_text += response.text
+        try:
+            response_text += response.text
+        except:
+            pass
         chatbot[-1] = (inputs, response_text)
         yield from update_ui(chatbot=chatbot, history=history)
 
