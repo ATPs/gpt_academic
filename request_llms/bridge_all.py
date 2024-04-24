@@ -81,6 +81,7 @@ get_token_num_gpt4 = lambda txt: len(tokenizer_gpt4.encode(txt, disallowed_speci
 # 开始初始化模型
 AVAIL_LLM_MODELS, LLM_MODEL = get_conf("AVAIL_LLM_MODELS", "LLM_MODEL")
 AVAIL_LLM_MODELS = AVAIL_LLM_MODELS + [LLM_MODEL]
+print(AVAIL_LLM_MODELS)
 # -=-=-=-=-=-=- 以下这部分是最早加入的最稳定的模型 -=-=-=-=-=-=-
 model_info = {
     # openai
@@ -617,6 +618,40 @@ if "google_gemini_1.5" in AVAIL_LLM_MODELS:   # zhipuai
             "google_gemini_1.5": {
                 "fn_with_ui": google_gemini_ui_1_5,
                 "fn_without_ui": google_gemini_noui_1_5,
+                "endpoint": None,
+                "max_token": 32000,
+                "tokenizer": tokenizer_gpt35,
+                "token_cnt": get_token_num_gpt35,
+            }
+        })
+    except:
+        print(trimmed_format_exc())
+
+if "meta-llama/Meta-Llama-3-70B-Instruct" in AVAIL_LLM_MODELS:   # zhipuai
+    try:
+        from .bridge_deepinfra_llama3 import predict_no_ui_long_connection as deepinfra_noui_llama3
+        from .bridge_deepinfra_llama3 import predict as deepinfra_ui_llama3
+        model_info.update({
+            "meta-llama/Meta-Llama-3-70B-Instruct": {
+                "fn_with_ui": deepinfra_ui_llama3,
+                "fn_without_ui": deepinfra_noui_llama3,
+                "endpoint": None,
+                "max_token": 32000,
+                "tokenizer": tokenizer_gpt35,
+                "token_cnt": get_token_num_gpt35,
+            }
+        })
+    except:
+        print(trimmed_format_exc())
+
+if "microsoft/WizardLM-2-8x22B" in AVAIL_LLM_MODELS:   # zhipuai
+    try:
+        from .bridge_deepinfra_ms_WizardLM_2_8_22B import predict_no_ui_long_connection as deepinfra_noui_ms_WizardLM_2_8_22B
+        from .bridge_deepinfra_ms_WizardLM_2_8_22B import predict as deepinfra_ui_ms_WizardLM_2_8_22B
+        model_info.update({
+            "microsoft/WizardLM-2-8x22B": {
+                "fn_with_ui": deepinfra_ui_ms_WizardLM_2_8_22B,
+                "fn_without_ui": deepinfra_noui_ms_WizardLM_2_8_22B,
                 "endpoint": None,
                 "max_token": 32000,
                 "tokenizer": tokenizer_gpt35,
