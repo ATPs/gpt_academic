@@ -111,7 +111,16 @@ model_info = {
         "tokenizer": tokenizer_gpt35,
         "token_cnt": get_token_num_gpt35,
     },
-
+    
+    "gpt-4o-mini": {
+        "fn_with_ui": chatgpt_ui,
+        "fn_without_ui": chatgpt_noui,
+        "endpoint": openai_endpoint,
+        "has_multimodal_capacity": True,
+        "max_token": 128000,
+        "tokenizer": tokenizer_gpt4,
+        "token_cnt": get_token_num_gpt4,
+    },
     "gpt-3.5-turbo-16k-0613": {
         "fn_with_ui": chatgpt_ui,
         "fn_without_ui": chatgpt_noui,
