@@ -20,7 +20,7 @@ genai = OpenAI(
     api_key = DEEPINFRA_API_KEY,
     base_url ="https://api.deepinfra.com/v1/openai",
 )
-MODEL_NAME = 'meta-llama/Meta-Llama-3-70B-Instruct'
+MODEL_NAME = 'meta-llama/Llama-3.3-70B-Instruct'
 
 def generate_message_payload(history, inputs):
     '''
