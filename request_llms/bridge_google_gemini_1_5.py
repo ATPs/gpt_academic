@@ -15,10 +15,10 @@ timeout_bot_msg = '[Local Message] Request timeout. Network error. Please check 
                   '网络错误，检查代理服务器是否可用，以及代理设置的格式是否正确，格式须是[协议]://[地址]:[端口]，缺一不可。'
 
 GOOGLE_API_KEY=get_conf("GOOGLE_API_KEY")
-model_name = 'gemini-1.5-pro-latest'
+model_name = 'gemini-exp-1206'
 
 genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel('gemini-1.5-pro-latest')
+model = genai.GenerativeModel('gemini-exp-1206')
 chat = model.start_chat()
 
 def generate_message_payload(history, inputs):

@@ -7,19 +7,20 @@ import re
 import os
 import time
 import logging
-import google.generativeai as genai
+from openai import OpenAI
 from toolbox import get_conf, update_ui, update_ui_lastest_msg, have_any_recent_upload_image_files, trimmed_format_exc
 
 proxies, TIMEOUT_SECONDS, MAX_RETRY = get_conf('proxies', 'TIMEOUT_SECONDS', 'MAX_RETRY')
 timeout_bot_msg = '[Local Message] Request timeout. Network error. Please check proxy settings in config.py.' + \
                   '网络错误，检查代理服务器是否可用，以及代理设置的格式是否正确，格式须是[协议]://[地址]:[端口]，缺一不可。'
 
-GOOGLE_API_KEY=get_conf("GOOGLE_API_KEY")
-model_name = 'gemini-2.0-flash-exp'
+DEEPSEEK_API_KEY=get_conf("DEEPSEEK_API_KEY")
 
-genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel('gemini-2.0-flash-exp')
-chat = model.start_chat()
+genai = OpenAI(
+    api_key = DEEPSEEK_API_KEY,
+    base_url ="https://api.deepseek.com",
+)
+MODEL_NAME = 'deepseek-chat'
 
 def generate_message_payload(history, inputs):
     '''
@@ -37,21 +38,20 @@ def generate_message_payload(history, inputs):
     messages = []
     for i in range(len(ls_history)):
         if i % 2 == 0:
-            messages.append({'role':'user', 'parts': [ls_history[i]]})
+            messages.append({'role':'user', 'content': ls_history[i]})
         else:
-            messages.append({'role':'model', 'parts': [ls_history[i]]})
+            messages.append({'role':'assistant', 'content': ls_history[i]})
     return messages
-
 
 def predict_no_ui_long_connection(inputs, llm_kwargs, history=[], sys_prompt="", observe_window=None,
                                   console_slience=False):
     # 检查API_KEY
-    if get_conf("GOOGLE_API_KEY") == "":
-        raise ValueError(f"请配置 GOOGLE_API_KEY")
+    if get_conf("DEEPSEEK_API_KEY") == "":
+        raise ValueError(f"请配置 DEEPSEEK_API_KEY")
     
     # prepare the input
     messages = generate_message_payload(history, inputs)
-    response = model.generate_content(messages)
+    response = genai.chat.completions.create(messages=messages,model=MODEL_NAME)
     return response.text
 
 
@@ -59,8 +59,8 @@ def predict(inputs, llm_kwargs, plugin_kwargs, chatbot, history=[], system_promp
     
     chatbot.append((inputs, ""))
     # 检查API_KEY
-    if get_conf("GOOGLE_API_KEY") == "":
-        raise ValueError(f"请配置 GOOGLE_API_KEY")
+    if get_conf("DEEPSEEK_API_KEY") == "":
+        raise ValueError(f"请配置 DEEPSEEK_API_KEY")
         return None
     
     if additional_fn is not None:
@@ -71,22 +71,22 @@ def predict(inputs, llm_kwargs, plugin_kwargs, chatbot, history=[], system_promp
     messages = generate_message_payload(history, inputs)
     # 开始接收回复
     print(messages)
-    response_iter = model.generate_content(messages, stream=True)
+    response_iter = genai.chat.completions.create(messages=messages, model=MODEL_NAME, stream=True)
     response_text = ''
-    for response in response_iter:
-        try:
-            response_text += response.text
-        except:
-            pass
+    for n,response in enumerate(response_iter):
+        if not response.choices[0].delta.content:
+            continue
+        response_text += response.choices[0].delta.content
         chatbot[-1] = (inputs, response_text)
-        yield from update_ui(chatbot=chatbot, history=history)
+        if n % 10 == 0:
+            yield from update_ui(chatbot=chatbot, history=history)
 
     raw_input = inputs
-    logging.info(f'{model_name} [raw_input] {raw_input}')
-    logging.info(f'{model_name} [response] {response_text}')
+    logging.info(f'{MODEL_NAME} [raw_input] {raw_input}')
+    logging.info(f'{MODEL_NAME} [response] {response_text}')
     # 总结输出
-    if response_text == f"[Local Message] 等待{model_name}响应中 ...":
-        response_text = f"[Local Message] {model_name}响应异常 ..."
+    if response_text == f"[Local Message] 等待{MODEL_NAME}响应中 ...":
+        response_text = f"[Local Message] {MODEL_NAME}响应异常 ..."
     history.extend([inputs, response_text])
     yield from update_ui(chatbot=chatbot, history=history)
 

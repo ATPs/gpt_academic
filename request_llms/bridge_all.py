@@ -636,12 +636,12 @@ if "google_gemini_1.5" in AVAIL_LLM_MODELS:   # zhipuai
     except:
         print(trimmed_format_exc())
 
-if "meta-llama/Meta-Llama-3-70B-Instruct" in AVAIL_LLM_MODELS:   # zhipuai
+if "meta-llama/Llama-3.3-70B-Instruct" in AVAIL_LLM_MODELS:   # zhipuai
     try:
         from .bridge_deepinfra_llama3 import predict_no_ui_long_connection as deepinfra_noui_llama3
         from .bridge_deepinfra_llama3 import predict as deepinfra_ui_llama3
         model_info.update({
-            "meta-llama/Meta-Llama-3-70B-Instruct": {
+            "meta-llama/Llama-3.3-70B-Instruct": {
                 "fn_with_ui": deepinfra_ui_llama3,
                 "fn_without_ui": deepinfra_noui_llama3,
                 "endpoint": None,
@@ -653,6 +653,23 @@ if "meta-llama/Meta-Llama-3-70B-Instruct" in AVAIL_LLM_MODELS:   # zhipuai
     except:
         print(trimmed_format_exc())
 
+
+if "deepseek-chat" in AVAIL_LLM_MODELS:   # zhipuai
+    try:
+        from .bridge_deepseek import predict_no_ui_long_connection as deepseek_noui
+        from .bridge_deepseek import predict as deepseek_ui
+        model_info.update({
+            "deepseek-chat": {
+                "fn_with_ui": deepseek_ui,
+                "fn_without_ui": deepseek_noui,
+                "endpoint": None,
+                "max_token": 32000,
+                "tokenizer": tokenizer_gpt35,
+                "token_cnt": get_token_num_gpt35,
+            }
+        })
+    except:
+        print(trimmed_format_exc())
 if "microsoft/WizardLM-2-8x22B" in AVAIL_LLM_MODELS:   # zhipuai
     try:
         from .bridge_deepinfra_ms_WizardLM_2_8_22B import predict_no_ui_long_connection as deepinfra_noui_ms_WizardLM_2_8_22B
